@@ -1,3 +1,4 @@
+from collections import OrderedDict
 import os
 import torch
 from torch import nn
@@ -29,6 +30,8 @@ class VGGModel_auto(nn.Module):
             self.layers.append(nn.Conv2d(self.channel_size, num, 3, 1, 1))
             self.layers.append(nn.ReLU())
             self.channel_size = num
+
+        self.conv_relu_stack = nn.Sequential(OrderedDict(self.layers))    
 
         self.flatten = nn.Flatten()
 
